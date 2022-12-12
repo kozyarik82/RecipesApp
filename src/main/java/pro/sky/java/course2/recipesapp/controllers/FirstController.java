@@ -12,7 +12,7 @@ public class FirstController {
     }
 
     @GetMapping("/info")
-    public String info(@RequestParam String info) {
-        return "Info: имя разработчика: Kozyar Oxana, название проекта: Recipes, дата создания 12.12.2022, опимание: приложение предназначено для создания рецептов" + info;
+    public String info() {
+        return "Info: имя разработчика: Kozyar Oxana, название проекта: Recipes, дата создания 12.12.2022, описание: приложение предназначено для создания рецептов";
     }
 }
