@@ -1,0 +1,15 @@
+### добавление ингредиента
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "egg",
+  "amount": 2,
+  "unitOfMeasure": "ks"
+}
+
+
+
+### получение ингредиента
+GET http://localhost:8080/ingredient
