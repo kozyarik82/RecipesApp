@@ -1,14 +1,15 @@
 package pro.sky.java.course2.recipesapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe {
     private final int id;
 
-    private final String title;
-    private final int timeOfPreparing;
-    private final List<Ingredient> ingredients;
-    private final List<String> steps;
+    private String title;
+    private  int timeOfPreparing;
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<String> steps = new ArrayList<>();
 
     public Recipe(int id, String title, int timeOfPreparing, List<Ingredient> ingredients, List<String> steps) {
         this.id = id;
@@ -36,5 +37,21 @@ public class Recipe {
 
     public List<String> getSteps() {
         return steps;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTimeOfPreparing(int timeOfPreparing) {
+        this.timeOfPreparing = timeOfPreparing;
     }
 }

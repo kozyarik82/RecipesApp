@@ -2,9 +2,9 @@ package pro.sky.java.course2.recipesapp.model;
 
 public class Ingredient {
     private final int id;
-    private final String title;
-    private final int amount;
-    private final String unitOfMeasure;
+    private  final String title;
+    private   int amount;
+    private   String unitOfMeasure;
 
     public Ingredient(int id,String title, int amount, String unitOfMeasure) {
         this.id = id;
@@ -27,5 +27,13 @@ public class Ingredient {
 
     public String getUnitOfMeasure() {
         return unitOfMeasure;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setUnitOfMeasure(String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 }

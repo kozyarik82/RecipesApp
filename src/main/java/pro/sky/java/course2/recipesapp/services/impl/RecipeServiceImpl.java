@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.java.course2.recipesapp.model.Recipe;
 import pro.sky.java.course2.recipesapp.services.RecipeService;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,5 +28,27 @@ public class RecipeServiceImpl implements RecipeService {
         } else {
             throw new RuntimeException("Такого рецепта не существует!");
         }
+    }
+    @Override
+    public Collection<Recipe> getAll() {
+        return recipes.values();
+    }
+
+    @Override
+    public Recipe updateRecipe(int id, Recipe recipe) {
+        Recipe serviceRecipe = recipes.get(id);
+        if (serviceRecipe == null) {
+            throw new RuntimeException("Такого рецепта не существует!");
+        }
+        serviceRecipe.setTitle(recipe.getTitle());
+        serviceRecipe.setTimeOfPreparing(recipe.getTimeOfPreparing());
+        serviceRecipe.setIngredients(recipe.getIngredients());
+        serviceRecipe.setSteps(recipe.getSteps());
+        return serviceRecipe;
+    }
+
+    @Override
+    public Recipe removeRecipe(int id) {
+        return recipes.remove(id);
     }
 }
