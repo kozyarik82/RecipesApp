@@ -11,24 +11,18 @@ import java.util.Map;
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final Map<Integer, Recipe> recipes = new HashMap<>();
+
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        if (recipes.isEmpty()) {
-            throw new RuntimeException("Данные отсутствуют!");
-        } else {
-            recipes.put(recipe.getId(), recipe);
-        }
+        recipes.put(recipe.getId(), recipe);
         return recipe;
     }
 
     @Override
     public Recipe getById(int id) {
-        if (recipes.containsKey(id)) {
-            return recipes.get(id);
-        } else {
-            throw new RuntimeException("Такого рецепта не существует!");
-        }
+        return recipes.get(id);
     }
+
     @Override
     public Collection<Recipe> getAll() {
         return recipes.values();
@@ -37,9 +31,6 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe updateRecipe(int id, Recipe recipe) {
         Recipe serviceRecipe = recipes.get(id);
-        if (serviceRecipe == null) {
-            throw new RuntimeException("Такого рецепта не существует!");
-        }
         serviceRecipe.setTitle(recipe.getTitle());
         serviceRecipe.setTimeOfPreparing(recipe.getTimeOfPreparing());
         serviceRecipe.setIngredients(recipe.getIngredients());

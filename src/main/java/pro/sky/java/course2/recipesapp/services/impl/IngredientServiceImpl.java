@@ -12,24 +12,18 @@ import java.util.Map;
 public class IngredientServiceImpl implements IngredientService {
 
     private final Map<Integer, Ingredient> ingredients = new HashMap<>();
+
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
-        if (ingredients.isEmpty()) {
-            throw new RuntimeException("Данные отсутствуют!");
-        } else {
-            ingredients.put(ingredient.getId(), ingredient);
-        }
+        ingredients.put(ingredient.getId(), ingredient);
         return ingredient;
     }
 
     @Override
     public Ingredient getById(int id) {
-        if (ingredients.containsKey(id)) {
-            return ingredients.get(id);
-        } else {
-            throw new RuntimeException("Такого ингдеиента не существует!");
-        }
+        return ingredients.get(id);
     }
+
     @Override
     public Collection<Ingredient> getAll() {
         return ingredients.values();
@@ -38,9 +32,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient updateIngredient(int id, Ingredient ingredient) {
         Ingredient serviceIngredient = ingredients.get(id);
-        if (serviceIngredient == null) {
-            throw new RuntimeException("такого ингредиента не существует!");
-        }
         serviceIngredient.setAmount(ingredient.getAmount());
         serviceIngredient.setUnitOfMeasure(ingredient.getUnitOfMeasure());
         return serviceIngredient;
