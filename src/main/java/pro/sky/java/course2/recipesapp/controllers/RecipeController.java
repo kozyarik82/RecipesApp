@@ -21,10 +21,10 @@ import java.util.Collection;
 @RequestMapping("/recipe")
 @Tag(name = "Рецепты", description = "CRUD-операции для работы с рецептами")
 public class RecipeController {
-    private final RecipeServiceImpl recipeServiceImpl;
+    private final RecipeService recipeService;
 
-    public RecipeController(RecipeServiceImpl recipeServiceImpl) {
-        this.recipeServiceImpl = recipeServiceImpl;
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/{id}")
@@ -47,11 +47,11 @@ public class RecipeController {
                     example = "целое положительное число")
     })
     public ResponseEntity<Recipe> getById(@PathVariable int id) {
-        Recipe recipe = recipeServiceImpl.getById(id);
+        Recipe recipe = recipeService.getById(id);
         if (recipe==null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(recipeServiceImpl.getById(id));
+        return ResponseEntity.ok(recipeService.getById(id));
     }
 
     @PostMapping
@@ -69,7 +69,7 @@ public class RecipeController {
             )
     })
     public Recipe createRecipe(@RequestBody Recipe recipe) {
-        return this.recipeServiceImpl.addRecipe(recipe);
+        return this.recipeService.addRecipe(recipe);
     }
 
     @GetMapping
@@ -87,7 +87,7 @@ public class RecipeController {
             )
     })
     public Collection<Recipe> getAll() {
-        return this.recipeServiceImpl.getAll();
+        return this.recipeService.getAll();
     }
 
     @PutMapping("/{id}")
@@ -109,7 +109,7 @@ public class RecipeController {
                     example = "целое положительное число")
     })
     public Recipe updateRecipe(@PathVariable int id, @RequestBody Recipe recipe) {
-        return recipeServiceImpl.updateRecipe(id, recipe);
+        return recipeService.updateRecipe(id, recipe);
     }
 
     @DeleteMapping("/{id}")
@@ -131,7 +131,7 @@ public class RecipeController {
                     example = "целое положительное число")
     })
     public Recipe removeRecipe(int id) {
-        return recipeServiceImpl.removeRecipe(id);
+        return recipeService.removeRecipe(id);
     }
 
 }

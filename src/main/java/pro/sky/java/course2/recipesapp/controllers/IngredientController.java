@@ -20,10 +20,10 @@ import java.util.Collection;
 @RequestMapping("/ingredient")
 @Tag(name="Ингредиенты",description = "CRUD-операции для работы с ингредиентами")
 public class IngredientController {
-    private final IngredientServiceImpl ingredientServiceImpl;
+    private final IngredientService ingredientService;
 
-    public IngredientController(IngredientServiceImpl ingredientServiceImpl) {
-        this.ingredientServiceImpl = ingredientServiceImpl;
+    public IngredientController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
     }
     @GetMapping("/{id}")
     @Operation(
@@ -45,11 +45,11 @@ public class IngredientController {
             example = "целое положительное число")
     })
     public ResponseEntity<Ingredient> getById(@PathVariable int id) {
-        Ingredient ingredient = ingredientServiceImpl.getById(id);
+        Ingredient ingredient = ingredientService.getById(id);
         if (ingredient==null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(ingredientServiceImpl.getById(id));
+        return ResponseEntity.ok(ingredientService.getById(id));
     }
     @PostMapping
     @Operation(summary = "Добавление ингредиента", description = "Добавление возможно при заполнении всех полей")
@@ -66,7 +66,7 @@ public class IngredientController {
             )
     })
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
-        return ingredientServiceImpl.addIngredient(ingredient);
+        return ingredientService.addIngredient(ingredient);
     }
 
     @GetMapping
@@ -84,7 +84,7 @@ public class IngredientController {
             )
     })
     public Collection<Ingredient> getAll() {
-        return this.ingredientServiceImpl.getAll();
+        return this.ingredientService.getAll();
     }
 
     @PutMapping("/{id}")
@@ -106,7 +106,7 @@ public class IngredientController {
                     example = "целое положительное число")
     })
     public Ingredient updateIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
-        return this.ingredientServiceImpl.updateIngredient(id,ingredient);
+        return this.ingredientService.updateIngredient(id,ingredient);
     }
 
     @DeleteMapping("/{id}")
@@ -128,7 +128,7 @@ public class IngredientController {
                     example = "целое положительное число")
     })
     public Ingredient removeIngredient(@PathVariable int id) {
-        return this.ingredientServiceImpl.removeIngredient(id);
+        return this.ingredientService.removeIngredient(id);
     }
 
 
