@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.recipesapp.services.FilesServiceRecipe;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,8 +32,8 @@ public class FilesServiceRecipeImpl implements FilesServiceRecipe {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean cleanDataFileRecipe() {
+    @Override
+    public boolean cleanDataFileRecipe() {
         try {
             Path path = Path.of(dataFilePathRecipe, dataFileNameRecipe);
             Files.deleteIfExists(path);
@@ -42,5 +43,9 @@ public class FilesServiceRecipeImpl implements FilesServiceRecipe {
             e.printStackTrace();
             return false;
         }
+    }
+    @Override
+    public File getDataFileRecipe() {
+        return new File(dataFilePathRecipe + "/" + dataFileNameRecipe);
     }
 }

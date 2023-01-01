@@ -1,5 +1,7 @@
 package pro.sky.java.course2.recipesapp.services;
 
+import java.io.File;
+
 public interface FilesServiceIngredient {
 
 
@@ -8,4 +10,8 @@ public interface FilesServiceIngredient {
 
 
     String readFromFileIngredient();
+
+    boolean cleanDataFileIngredient();
+
+    File getDataFileIngredient();
 }
