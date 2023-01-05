@@ -31,7 +31,7 @@ public class FilesServiceIngredientImpl implements FilesServiceIngredient {
         try {
             return Files.readString(Path.of(dataFilePathIngredient, dataFileNameIngredient));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Файл не удалось прочитать");
         }
     }
     @Override

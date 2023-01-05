@@ -65,7 +65,7 @@ public class RecipeServiceImpl implements RecipeService {
             String json = new ObjectMapper().writeValueAsString(recipes);
             filesServiceRecipe.saveToFileRecipe(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Файл не удалось сохранить!");
         }
     }
 
@@ -75,7 +75,7 @@ public class RecipeServiceImpl implements RecipeService {
             recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Файл не удалось прочитать!");
         }
     }
 }
