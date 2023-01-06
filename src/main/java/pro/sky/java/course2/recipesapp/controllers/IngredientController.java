@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import pro.sky.java.course2.recipesapp.model.Ingredient;
 import pro.sky.java.course2.recipesapp.services.IngredientService;
 import pro.sky.java.course2.recipesapp.services.impl.IngredientServiceImpl;
+import pro.sky.java.course2.recipesapp.services.impl.NotFailedException;
 
 import java.util.Collection;
 
@@ -65,7 +66,7 @@ public class IngredientController {
                     }
             )
     })
-    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
+    public Ingredient createIngredient(@RequestBody Ingredient ingredient) throws NotFailedException {
         return ingredientService.addIngredient(ingredient);
     }
 
@@ -105,7 +106,7 @@ public class IngredientController {
             @Parameter(name = "id",
                     example = "целое положительное число")
     })
-    public Ingredient updateIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) {
+    public Ingredient updateIngredient(@PathVariable int id, @RequestBody Ingredient ingredient) throws NotFailedException {
         return this.ingredientService.updateIngredient(id,ingredient);
     }
 

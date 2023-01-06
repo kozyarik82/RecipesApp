@@ -6,10 +6,7 @@ import java.io.File;
 
 public interface FilesServiceIngredient {
 
-
     boolean saveToFileIngredient(String json);
-
-
 
     String readFromFileIngredient() throws NotFailedException;
 
