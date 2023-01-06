@@ -23,12 +23,12 @@ public class RecipeServiceImpl implements RecipeService {
 
 
     @PostConstruct
-    private void initRecipe() {
+    private void initRecipe() throws NotFailedException {
         readFromFileRecipe();
     }
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Recipe addRecipe(Recipe recipe) throws NotFailedException {
         recipes.put(recipe.getId(), recipe);
         saveToFileRecipe();
         return recipe;
@@ -45,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe updateRecipe(int id, Recipe recipe) {
+    public Recipe updateRecipe(int id, Recipe recipe) throws NotFailedException {
         Recipe serviceRecipe = recipes.get(id);
         serviceRecipe.setTitle(recipe.getTitle());
         serviceRecipe.setTimeOfPreparing(recipe.getTimeOfPreparing());
@@ -60,22 +60,22 @@ public class RecipeServiceImpl implements RecipeService {
         return recipes.remove(id);
     }
 
-    private void saveToFileRecipe() {
+    private void saveToFileRecipe() throws NotFailedException {
         try {
             String json = new ObjectMapper().writeValueAsString(recipes);
             filesServiceRecipe.saveToFileRecipe(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Файл не удалось сохранить!");
+            throw new NotFailedException("Файл не удалось сохранить!");
         }
     }
 
-    private void readFromFileRecipe() {
+    private void readFromFileRecipe() throws NotFailedException {
         try {
             String json = filesServiceRecipe.readFromFileRecipe();
             recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Файл не удалось прочитать!");
+            throw new NotFailedException("Файл не удалось прочитать!");
         }
     }
 }

@@ -24,12 +24,12 @@ public class IngredientServiceImpl implements IngredientService {
 
 
     @PostConstruct
-    private void initIngredient() {
+    private void initIngredient() throws NotFailedException {
         readFromFileIngredient();
     }
 
     @Override
-    public Ingredient addIngredient(Ingredient ingredient) {
+    public Ingredient addIngredient(Ingredient ingredient) throws NotFailedException {
         ingredients.put(ingredient.getId(), ingredient);
         saveToFileIngredient();
         return ingredient;
@@ -46,7 +46,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Ingredient updateIngredient(int id, Ingredient ingredient) {
+    public Ingredient updateIngredient(int id, Ingredient ingredient) throws NotFailedException {
         Ingredient serviceIngredient = ingredients.get(id);
         serviceIngredient.setAmount(ingredient.getAmount());
         serviceIngredient.setUnitOfMeasure(ingredient.getUnitOfMeasure());
@@ -59,22 +59,22 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredients.remove(id);
     }
 
-    private void saveToFileIngredient() {
+    private void saveToFileIngredient() throws NotFailedException{
         try {
             String json = new ObjectMapper().writeValueAsString(ingredients);
             filesServiceIngredient.saveToFileIngredient(json);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Файл не удалось сохранить!");
+            throw new NotFailedException("Файл не удалось сохранить!");
         }
     }
 
-    private void readFromFileIngredient() {
+    private void readFromFileIngredient() throws NotFailedException{
         try {
             String json = filesServiceIngredient.readFromFileIngredient();
             ingredients = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Файл не удалось прочитать!");
+            throw new NotFailedException("Файл не удалось прочитать!");
         }
     }
 

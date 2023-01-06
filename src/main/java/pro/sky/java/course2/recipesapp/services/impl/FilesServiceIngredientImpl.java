@@ -27,11 +27,11 @@ public class FilesServiceIngredientImpl implements FilesServiceIngredient {
     }
 
     @Override
-    public String readFromFileIngredient() {
+    public String readFromFileIngredient() throws NotFailedException {
         try {
             return Files.readString(Path.of(dataFilePathIngredient, dataFileNameIngredient));
         } catch (IOException e) {
-            throw new RuntimeException("Файл не удалось прочитать");
+            throw new NotFailedException("не удалось прочитать файл");
         }
     }
     @Override
