@@ -14,6 +14,10 @@ public class FilesServiceRecipeImpl implements FilesServiceRecipe {
     private String dataFilePathRecipe;
     @Value("${name.of.recipe.file}")
     private String dataFileNameRecipe;
+    @Value("${path.to.recipe.txt.file}")
+    private String dataFilePathRecipeTxt;
+    @Value("${name.of.recipe.txt.file}")
+    private String dataFileNameRecipeTxt;
     @Override
     public boolean saveToFileRecipe(String json) {
         try {
@@ -47,5 +51,10 @@ public class FilesServiceRecipeImpl implements FilesServiceRecipe {
     @Override
     public File getDataFileRecipe() {
         return new File(dataFilePathRecipe + "/" + dataFileNameRecipe);
+    }
+
+    @Override
+    public File getDataFileRecipeTxt() {
+        return new File(dataFilePathRecipeTxt + "/" + dataFileNameRecipeTxt);
     }
 }

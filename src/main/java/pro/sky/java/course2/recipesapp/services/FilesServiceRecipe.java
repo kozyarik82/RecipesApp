@@ -13,4 +13,6 @@ public interface FilesServiceRecipe {
     boolean cleanDataFileRecipe();
 
     File getDataFileRecipe();
+
+    File getDataFileRecipeTxt();
 }
