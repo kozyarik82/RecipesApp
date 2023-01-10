@@ -25,11 +25,11 @@ public class FilesServiceRecipeImpl implements FilesServiceRecipe {
         }
     }
     @Override
-    public String readFromFileRecipe() {
+    public String readFromFileRecipe() throws NotFailedException {
         try {
             return Files.readString(Path.of(dataFilePathRecipe, dataFileNameRecipe));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new NotFailedException("Файл не удалось прочитать!");
         }
     }
     @Override

@@ -47,4 +47,19 @@ public class FilesRecipeController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
     }
+    @GetMapping("/export")
+    public ResponseEntity<InputStreamResource> downloadFileRecipeTxt() throws FileNotFoundException {
+        File file = filesServiceRecipe.getDataFileRecipe();
+        if (file.exists()) {
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .contentLength(file.length())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename = \"RecipesLog.txt\"")
+                    .body(resource);
+        }else{
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 }
